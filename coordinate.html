@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#testDiv').on('mousemove', function (e) {
+                $('#showDiv').css("visibility","visible");
+                $('#showDiv').css("opacity","1");
+                var xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+                var yy = e.originalEvent.y || e.originalEvent.layerY || 0;
+                var x = xx*3;
+                var y = yy*3;
+                var top ;+
+                var left;
+                if(x>=100&&x<=500){
+                    left = -(x-100);
+                }else if(x<100){
+                    left  = 0;
+                }else if(x>500){
+                    left = -400;
+                }
+
+                if(y>=100&&y<=500){
+                    top = -(y-100);
+                }else if(y<100){
+                    top  = 0;
+                }else if(y>500){
+                    top = -400;
+                }
+                $('#bigImg').css('top',top+'px');
+                $('#bigImg').css('left',left+'px');
+
+
+            });
+            $('#testDiv').on('mouseout',function(e){
+                $('#showDiv').css("visibility","hidden");
+                $('#showDiv').css("opacity","0");
+            })
+        })
+    </script>
+    <style>
+        #box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 2px solid red;
+            overflow: visible;
+        }
+
+        #testDiv {
+            width: 200px;
+            height: 200px;
+            cursor: crosshair;;
+        }
+
+        #testDiv img{
+            width: 200px;
+            height: 200px;
+            cursor: crosshair;
+        }
+
+        #showDiv {
+            visibility: hidden;
+            position: absolute;
+            top: -2px;
+            left: 205px;
+            width: 200px;
+            height: 200px;
+            border: 2px solid green;
+            transition:ease 0.5s;
+            -moz-transition: ease 0.5s;
+            -webkit-transition: ease 0.5s;
+            -o-transition: ease 0.5s;
+            -ms-transition: ease 0.5s;
+            overflow: hidden;
+        }
+        #bigImg{
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            width: 600px;
+            height: 600px;
+        }
+    </style>
+    <title>mouse coordinate</title>
+</head>
+<body>
+<div id="box">
+    <div id="testDiv"><img src="images/profile.png"/></div>
+
+    <div id="showDiv">
+        <img id="bigImg" src="images/profile.png"/>
+    </div>
+</div>
+
+</body>
+</html>
