@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>闭包测试</title>
+    <script type="text/javascript">
+        var name ="this window";
+        var name2 = "uptown funk";
+        var object = new Object();
+        object.name = "nima";
+        object.getNameFunc = function () {
+            return function () {
+                var name ="cacacaa";
+                return this.name;
+            };
+        }
+        var f = object.getNameFunc();
+        var f1= function (){
+            return this.name2;
+        }
+
+        alert(f());
+        alert(f1());
+    </script>
+</head>
+<body>
+
+</body>
+</html>
