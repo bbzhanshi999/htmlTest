@@ -343,6 +343,7 @@ person1.sayName();*/
 /*重点：最理想的继承方式：寄生组合式继承*/
 
 //这种方式可以让子类在获得父类的属性和父类原型属性的同时，避免重复调用父类构造函数，以造成属性的重复
+/*
 function inheritPrototype(superType,subType){
     var prototype = Object.create(superType.prototype);
     prototype.constructor = subType;
@@ -373,6 +374,7 @@ console.log(s.isPrototypeOf(SubType));
 console.log(s instanceof SubType);
 console.log(s instanceof SuperType);
 
+*/
 
 
 

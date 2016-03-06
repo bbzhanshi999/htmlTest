@@ -864,7 +864,7 @@ console.log(hasPrototypeProperty(p1,"name"));
 */
 
 /*for in与keys及getOwnPropertyNames三种方法测试*/
-function Person(){
+/*function Person(){
     Person.prototype.name = "赵千里";
     Person.prototype.age = "30";
     this.toString = function(){
@@ -881,6 +881,88 @@ for(var prop in p1){
 console.log(Object.keys(p1));
 console.log(Object.keys(Object.getPrototypeOf(p1)));
 console.log(Object.getOwnPropertyNames(p1));
-console.log(Object.getOwnPropertyNames(Person.prototype));//不可枚举的属性也被显示出来（Enumerable:false）
+console.log(Object.getOwnPropertyNames(Person.prototype));//不可枚举的属性也被显示出来（Enumerable:false）*/
 
+/*prototype快速定义方法*/
+/*function Person(){
+
+}
+Person.prototype = {
+    //constructor:Person,//加上这句，prototype就有constructor了,这种方式可枚举
+    name:"niba",
+    age:"29",
+    sayName:function(){
+        console.log(this.name);
+    }
+}
+
+//加上这句，prototype就有constructor了,并且不可枚举
+Object.defineProperty(Person.prototype,'constructor',{
+    enumerable:false,
+    value:Person
+})
+
+
+var p = new Person();
+console.log(p.toString());
+p.sayName();
+for(var prop in p){
+    if(prop=="constructor"){
+        console.log("has constructor"); //IE8以下不会打印
+    }
+}
+console.log(Object.keys(Object.getPrototypeOf(p)));
+console.log(Object.getOwnPropertyNames(Person.prototype));//已经没有constructor了
+
+console.log(p instanceof Object);
+console.log(p instanceof Person);
+console.log(p.constructor==Object);
+console.log(p.constructor==Person);
+console.log(Person.prototype.constructor);*/
+
+/*重点：原型的动态特性*/
+/*function Person(){
+
+}
+var p = new Person();
+
+Person.prototype.sayHi= function(){
+    console.log("Hello");
+}
+p.sayHi();
+
+Person.prototype ={
+    sayHi:function(name){
+        console.log(name);
+    }
+}
+var p1 = new Person();
+p1.sayHi("niba");
+p.sayHi("niba");*/
+
+
+/*给基本包装类型添加方法*/
+/*String.prototype.isStart = function(text){
+    return this.indexOf(text)==0;
+}
+
+var a = "niba";
+var b = "ni";
+var c = "nd";
+console.log(a.isStart(b));
+console.log(a.isStart(c));*/
+
+/*prototype中的this值测试*/
+/*function Person(){
+     this.job = "solider";
+}
+Person.prototype = {
+    job : "driver",
+    sayJob:function(){
+        console.log(this.job);//这里的this就是p这个对象，因此遵循先找对象自己的属性，再找原型属性的原则
+    }
+}
+
+var p = new Person();
+p.sayJob();*/
 /****************/
