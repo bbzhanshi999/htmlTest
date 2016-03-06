@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>用于学习BOM对象</title>
+    <script type="text/javascript">
+        /*解析url后面的参数*/
+        function decode() {
+            var url = "https://www.baidu.com/s?word=youdao&tn=sitehao123&ie=utf-8&ssl_sample=normal";
+            var fakeUrl = encodeURI(url);
+            var arr = fakeUrl.split('?');
+            var search = arr[1];
+            var args = search.split('&');
+            var obj = {};
+            var items = new Array();
+            var key;
+            var value;
+            for(var i =0;i<args.length;i++){
+                items = args[i].split('=');
+                key =decodeURI(items[0]);
+                value =decodeURI(items[1]);
+                obj[key] = value;
+            }
+
+            console.log(obj);
+            console.log(obj.valueOf());
+            console.log(obj.toLocaleString());
+            console.log(obj.toString());
+        }
+
+        function showLocation(){
+            alert("href"+":"+location.href);
+            alert("hash"+":"+location.hash);
+            alert("host"+":"+location.host);
+            alert("hostname"+":"+location.hostname);
+            alert("pathname"+":"+location.pathname);
+            alert("port"+":"+location.port);
+            alert("protocol"+":"+location.protocol);
+            alert("search"+":"+location.search);
+        }
+
+        /**
+         * 利用location对象跳转页面的几种方式
+         * */
+        function changeLocation(){
+            //location.href="http://www.sina.com.cn";
+            //location.assign("http://www.sina.com.cn");
+            //window.location="http://www.sina.com.cn";
+        }
+
+        function replace() {
+            location.replace("http://www.sina.com.cn");//chrome无效        }
+        }
+
+        function showNav(){
+             console.log("appCodeName"+":"+navigator.appCodeName);
+             console.log("appName"+":"+navigator.appName);
+             console.log("appVersion"+":"+navigator.appVersion);
+             console.log("appMinorVersion"+":"+navigator.appMinorVersion);
+             console.log("buildID"+":"+navigator.buildID);
+             console.log("cookieEnabled"+":"+navigator.cookieEnabled);
+             console.log("cpuClass"+":"+navigator.cpuClass);
+             console.log("javaEnabled"+":"+navigator.javaEnabled());
+             console.log("language"+":"+navigator.language);
+             console.log("mimeTypes"+":"+navigator.mimeTypes[0]);
+             console.log("onLine"+":"+navigator.onLine);
+             console.log("opsProfile"+":"+navigator.opsProfile);
+             console.log("oscpu"+":"+navigator.oscpu);
+             console.log("platform"+":"+navigator.platform);
+             console.log("plugins"+":"+navigator.plugins);
+             //console.log("preference"+":"+navigator.preference());
+             console.log("product"+":"+navigator.product);
+             console.log("productSub"+":"+navigator.productSub);
+             //console.log("register-ContenHandeler"+":"+navigator.register-ContenHandeler());
+            // console.log("register-ProtocolHandeler"+":"+navigator.register-ProtocolHandeler());
+             console.log("securityPolicy"+":"+navigator.securityPolicy);
+             console.log("systemLanguage"+":"+navigator.systemLanguage);
+             //console.log("taintEnabled"+":"+navigator.taintEnabled());
+             console.log("userAgent"+":"+navigator.userAgent);
+             console.log("userLanguage"+":"+navigator.userLanguage);
+             console.log("userProfile"+":"+navigator.userProfile);
+             console.log("vendor"+":"+navigator.vendor);
+             console.log("vendorSub"+":"+navigator.vendorSub);
+        }
+
+
+        function showPlugins(){
+            var plugin = navigator.plugins;
+            for(var i =0;i<navigator.plugins.length;i++){
+                console.log("name"+":"+plugin[i].name);
+                console.log("description"+":"+plugin[i].description);
+                console.log("filename"+":"+plugin[i].filename);
+                console.log("length"+":"+plugin[i].length);
+            }
+        }
+
+        function showScreen(){
+            console.log("width"+":"+screen.width);
+            console.log("height"+":"+screen.height);
+            console.log("availWidth"+":"+screen.availWidth);
+            console.log("availHeight"+":"+screen.availHeight);
+        }
+
+        function showHis(){
+            alert(window.history.length);
+        }
+    </script>
+</head>
+<body>
+    <div style="width:960px;height: 600px;margin:0 auto;background-image: url('images/001.jpg');background-size: 100% 100%">
+        <input type="button" onclick="decode()" value="解析url参数">
+        <input type="button" onclick="showLocation()" value="展示location参数">
+        <input type="button" onclick="changeLocation()" value="页面跳转">
+        <input type="button" onclick="replace()" value="页面跳转禁用后退">
+        <input type="button" onclick="showNav()" value="检测navigator对象属性">
+        <input type="button" onclick="showPlugins()" value="检测浏览器插件">
+        <input type="button" onclick="showScreen()" value="检测screen对象属性">
+        <input type="button" onclick="showHis()" value="检测history对象属性">
+
+
+        <!--<iframe name="sub" width="300" height="300"></iframe>-->
+    </div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>用于学习DOM</title>
+    <link rel="stylesheet" href="css/DomlearningTest1.css"/>
+    <script>
+        window.onload = function () {
+            var btn = document.getElementById("test");
+            console.log("name:" + btn.nodeName);
+            console.log("type" + btn.nodeType);
+            btn.onclick = function () {
+                var div = document.getElementsByTagName("div")[0];
+                var arr = div.childNodes;
+                for (var i = 0; i < arr.length; i++) {
+                    console.log("name:" + arr[i].nodeName);
+                    console.log("type" + arr[i].nodeType);
+                }
+                console.log("长度：" + arr.length);
+            }
+        }
+
+        function createElementTest() {
+            var container = document.getElementById('ce');
+            console.log("div:" + container instanceof HTMLDivElement);
+            var ul = document.createElement("ul");
+            for (var i = 0; i < 5; i++) {
+                (function () {
+                    var li = document.createElement("li");
+                    li.innerText = 'li' + i;
+                    ul.appendChild(li);
+                })();
+            }
+            container.appendChild(ul);
+        }
+        function getAttributeTest() {
+            var div = document.getElementById('attrTest');
+            var table = document.createElement('table');
+            table.style.border = "1px solid red";
+            table.style.borderCollapse = "collapse";
+            var contents = new Array();
+            var keys = new Array();
+            keys.push("id");
+            keys.push("class");
+            keys.push("data-val");
+            keys.push("onchange");
+            keys.push("style");
+            contents.push(div.getAttribute('id'));
+            contents.push(div.getAttribute('class'));
+            contents.push(div.getAttribute('data-val'));
+            contents.push(div.getAttribute('onchange'));
+            contents.push(div.getAttribute('style'));
+            var tr;
+            var td1;
+            var td2;
+            for (var i = 0; i < contents.length; i++) {
+                tr = document.createElement('tr');
+                tr.style.border = "1px solid red";
+                td1 = document.createElement('td');
+                td1.style.border = "1px solid red";
+                td1.innerText = keys[i];
+                td2 = document.createElement('td');
+                td2.style.border = "1px solid red";
+                td2.innerText = contents[i];
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                table.appendChild(tr);
+            }
+            document.body.appendChild(table);
+        }
+
+        function setAttributeTest() {
+            var div = document.getElementById('attrTest');
+            div.setAttribute("data-set", "hehehe");
+            alert(div.getAttribute("data-set"));
+            alert(div.getAttribute("id"));
+            alert(div.attributes.getNamedItem("id").nodeValue);//另一种取得属性值的方法,每一个attr都是一个node对象
+        }
+
+        function serializeAttr() {
+            var div = document.getElementById('attrTest');
+            var json = new Array();
+            var pairs = new Array();
+            var key;
+            var value;
+
+            for (var i = 0; i < div.attributes.length; i++) {
+                key = div.attributes.item(i).nodeName;
+                value = div.attributes.item(i).nodeValue;
+                json.push(key + ":" + value);
+                pairs.push(key + "=\"" + value + "\"");
+            }
+            alert(pairs.join(" "));
+            alert(json);
+        }
+
+        function createTest() {
+            var div = document.getElementById('createTest');
+            var ifr= document.createElement("iframe");//ie7一下可用
+            ifr.src="http://www.baidu.com";
+            div.insertBefore(ifr, div.firstElementChild);
+        }
+
+        function changeStyle(){
+            var orilink = document.getElementsByTagName('link')[0];
+            var href = orilink.href;
+            var head =document.getElementsByTagName("head")[0];
+            head.removeChild(head.getElementsByTagName('link')[0]);
+            var link = document.createElement('link');
+            link.rel='stylesheet';
+            //link.href =href=='css/DomlearningTest2.css'? 'css/DomlearningTest1.css':'css/DomlearningTest2.css';
+            if(href.indexOf("DomlearningTest2")!=-1){
+                link.href = 'css/DomlearningTest1.css';
+            }else{
+                link.href = 'css/DomlearningTest2.css';
+            }
+           // link.href = 'css/DomlearningTest2.css';
+            head.appendChild(link);
+        }
+
+        function changeStyle2(){
+            var style = document.createElement('style');
+            try{
+                style.appendChild(document.createTextNode("body{background-color:red}"));
+            }catch(ex){
+                style.cssText="body{background-color:red}";
+            }
+
+            var head =document.getElementsByTagName("head")[0];
+            head.appendChild(style);
+        }
+    </script>
+</head>
+<body>
+<div style="background-color: #467612">
+    <div style="width: 100px;height: 100px;background-color: #467612">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+
+    </div>
+    <input id="test" type="button" value="dom测试"/>
+</div>
+<!--<div style="background-color: red;display: inline-block">
+    <script>
+        document.write("<Strong>测试document.write方法</Strong>");
+    </script>
+</div>-->
+<div id="ce" style="background-color: yellow">
+    <input type="button" value="测试js新建dom对象并插入功能" onclick="createElementTest()"/>
+</div>
+
+<div id="attrTest" class="attrTest hide" onchange="alert('nidie');" data-val="你娘"
+     style="background-color: yellow;width:200px;height:200px;text-align: center;">
+    <input type="button" value="测试getAttribute方法" onclick="getAttributeTest()"/>
+    <input type="button" value="测试setAttribute方法" onclick="setAttributeTest()"/>
+    <input type="button" value="利用attributes序列化dom" onclick="serializeAttr()"/>
+</div>
+<div id="createTest" style="background-color: burlywood">
+    <input type="button" value="测试createElement方法中直接输入字符串" onclick="createTest()"/>
+
+</div>
+<input type="button" value="测试动态改变外部css样式" onclick="changeStyle()"/>
+<input type="button" value="测试动态改变内部css样式" onclick="changeStyle2()"/>
+
+</body>
+</html>

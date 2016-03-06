@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>用于DOM扩展功能的测试</title>
+    <style>
+        div.container{
+            width: 1000px;
+            height:600px;
+
+        }
+        div.show{
+            border:2px solid #467612;
+        }
+        div.yellow{
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        function selectorTest(){
+            var container= document.querySelector('div.container');
+            container.style.backgroundColor='white';
+        }
+        function selectorTest2(){
+            var containers= document.querySelectorAll('div.container');
+            for(var i = 0;i<containers.length;i++){
+                containers[i].style.backgroundColor='white';
+            }
+        }
+        function selectorTest3(){
+            var ul = document.querySelector('div.container ul');
+            var lis  = ul.querySelectorAll('li');
+            for(var i = 0;i<lis.length;i++){
+                lis[i].innerText=lis[i].innerText+"+";
+            }
+        }
+
+        function deleteClass(name){
+            var div = document.getElementById('mydiv');
+            var classes = div.className.split(/\s+/);
+            var pos;
+            var i;
+            for(i=0;i<classes.length;i++){
+                if(classes[i]==name){
+                    pos= i;
+                    break;
+                }
+            }
+            classes.splice(pos,1);
+
+            div.className= classes.join(" ");
+        }
+        function deleteClassHtml5(name){
+            var div = document.getElementById('mydiv');
+            var classList= div.classList;
+            classList.remove(name);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <input type="button" value="测试selectorAPI" onclick="selectorTest()">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+        <input type="button" value="测试selectorAPI3" onclick="selectorTest3()">
+    </div>
+    <div class="container">
+        <input type="button" value="测试selectorAPI2" onclick="selectorTest2()">
+    </div>
+    <div id="mydiv" class="container show yellow">
+        <input type="button" value="删除class方法1" onclick="deleteClass('show')">
+        <input type="button" value="删除class方法2" onclick="deleteClass('yellow')">
+    </div>
+
+
+</body>
+</html>
