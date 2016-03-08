@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>event</title>
+    <script type="text/javascript">
+        /*跨浏览器适用的绑定时间方法*/
+        var EventUtils = {
+            addHandler: function (element, type, handler) {
+                if (element.addEventListener) {
+                    element.addEventListener(type, handler, false);
+                } else if (element.attachEvent) {
+                    element.attachEvent("on" + type, handler);
+                } else {
+                    element["on" + type] = handler;
+                }
+            },
+            removeHander: function (element, type, handler) {
+                if (element.removeEventListener) {
+                    element.removeEventListener(type, handler, false);
+                } else if (element.detachEvent) {
+                    element.detachEvent("on" + type, handler);
+                } else {
+                    element["on" + type] = null;
+                }
+            },
+            getEvent: function (event) {
+                return event ? event : window.event;
+            },
+            getTarget: function (event) {
+                return event.getTarget ? event.getTarget : event.srcElement;
+            },
+            preventDefault:function(event){
+                event.preventDefault?event.preventDefault():event.returnValue=false;
+            },
+            stopPropagation:function(event){
+                event.stopPropagation?event.stopPropagation():event.cancelBubble=true;
+            },
+            getRelatedTarget:function(event){
+                if(event.relatedTarget){
+                    return event.relatedTarget;
+                }else if(event.fromElement){
+                    return event.fromElement;
+                }else if(event.toElement){
+                    return event.toElement;
+                }else{
+                    return null;
+                }
+            },
+            /*当时间为mouseup或者mousedown时，可以通过event.button方法确定鼠标上哪个按键*/
+            getButton:function(event){
+                if(document.implementation.hasFeature('MouseEvents','2.0')){
+                    return event.button;
+                }else{
+                    switch(event.button){
+                        case 1:
+                        case 3:
+                        case 5:
+                        case 7:
+                            return 0;
+                        case 2:
+                        case 6:
+                            return 2;
+                        case 4:
+                            return 1;
+                    }
+                }
+            },
+
+            /*获得鼠标滚轮事件中的滚动值*/
+            getWheelDelta:function(event){
+                if(event.wheelDelta){
+                    return event.wheelDelta;
+                }else{
+                    return -event.detail*40;
+                }
+            },
+            /*获取字符编码值*/
+            getCharCode:function(event){
+                if(typeof event.charCode=='number'){
+                    return event.charCode;
+                }else{
+                    return event.keyCode;
+                }
+            }
+        }
+
+        /*window.onload = function () {
+            var btn1 = document.querySelectorAll("input[type='button']")[1];
+            EventUtils.addHandler(btn1, 'click', switchColor);
+
+            var div2 = document.getElementById('mydiv2');
+            var btn2 = document.querySelectorAll("input[type='button']")[2];
+            var handler = function (event) {
+                switch (event.type) {
+                    case 'click':
+                        div2.innerText = 'click';
+                        break;
+                    case 'mouseover':
+                        div2.style.backgroundColor = 'red';
+                        break;
+                    case 'mouseout':
+                        div2.style.backgroundColor = 'green';
+                        break;
+                }
+            }
+            btn2.onclick = handler;
+            btn2.onmouseover = handler;
+            btn2.onmouseout = handler;
+
+
+            var a = document.querySelector('a');
+            a.onclick = function (e) {
+                alert(e.cancelable);
+                //e.cancelable=true;
+                e.preventDefault();
+            }
+        }
+
+
+        function switchColor(event) {
+            alert(event.currentTarget.nodeName);
+            /!*currentTaget表示事件绑定的元素*!/
+            alert(event.target.nodeName);
+            /!*target表示实际被触发的元素*!/
+            alert(this.nodeName);
+            /!*表示事件绑定的元素*!/
+
+            var div = document.getElementById('mydiv');
+            if (div.style.backgroundColor == "#d9f499") {
+                div.style.backgroundColor = "#777777";
+            } else {
+                div.style.backgroundColor = "#d9f499";
+            }
+        }*/
+
+        /*window.onload = function () {
+            var btn = document.querySelector('input[type="button"]');
+            var div = document.getElementsByTagName('div')[0];
+            var body = document.body;
+
+            btn.onclick = function (event) {
+                alert("btn.onclick:" + event.eventPhase);//1
+            }
+
+            div.onclick = function (event) {
+                alert("div.onclick:" + event.eventPhase);//2
+            }
+
+            div.addEventListener('click', function () {
+                alert("div click:" + event.eventPhase);//3
+            }, false);
+            /!*这里false意味着不允许事件捕获，true为允许*!/
+            EventUtils.addHandler(window,'resize',function(event){
+                event = EventUtils.getEvent(event);
+                var target= EventUtils.getTarget(event);
+                //alert(target.document);
+            })
+
+        }*/
+        /*window.onload=function(){
+            EventUtils.addHandler(window,'scroll',function(){
+                console.log(document.body.scrollTop);
+            })
+            //alert(document.implementation.hasFeature('MouseEvents','3.0'));
+            EventUtils.addHandler(document.body,'click',function(event){
+                event = EventUtils.getEvent(event);
+
+                /!*client指鼠标在视口中的坐标*!/
+                alert(event.clientX);
+                alert(event.clientY);
+
+                /!*page指鼠标与页面的坐标*!/
+                alert(event.pageX);
+                alert(event.pageY);
+
+                /!*screen指鼠标与电脑屏幕的坐标*!/
+                alert(event.screenX);
+                alert(event.screenY);
+            })
+        }*/
+        /*获取修改键*/
+        function editKey(event){
+            var arr =new Array();
+            if(event.ctrlKey){
+                arr.push("Ctrl")
+            }
+            if(event.altKey){
+                arr.push("alt")
+            }
+            if(event.shiftKey){
+                arr.push("shift")
+            }
+            if(event.metaKey) {
+                arr.push("win");//windows键貌似无法判断
+            }
+            alert(arr);
+        }
+
+        window.onload = function(){
+            var btn = document.getElementsByTagName('input')[1];
+            EventUtils.addHandler(btn,'mousedown',function(event){
+                event = EventUtils.getEvent(event);
+                console.log("down"+EventUtils.getButton(event));
+            });
+
+            EventUtils.addHandler(btn,'mouseup',function(event){
+                event = EventUtils.getEvent(event);
+                console.log("up"+EventUtils.getButton(event));
+            });
+
+
+            /*获取鼠标滚轮事件属性,不支持火狐*/
+            EventUtils.addHandler(document,'mousewheel',function(event){
+                event = EventUtils.getEvent(event);
+                console.log(event.wheelDelta);
+            });
+
+
+            EventUtils.addHandler(document,'DOMMouseScroll',function(event){
+                event = EventUtils.getEvent(event);
+                console.log(event.detail);
+            });
+
+
+            /*测试鼠标修改键*/
+            var btn2 = document.getElementsByTagName('input')[2];
+            EventUtils.addHandler(btn2,'click',editKey);
+
+            /*测试键盘修改键*/
+            var textInput = document.querySelector("input[type='text']");
+            EventUtils.addHandler(textInput,'keypress',editKey);
+
+
+            /*测试键码*/
+            var inputText = document.querySelector("#dd input");
+            var outputText =document.querySelectorAll("#dd input")[1];
+            EventUtils.addHandler(inputText,"keydown",function(event){
+                if(event.keyCode&&(event.keyCode<47||event.keyCode>90||event.keycode==59)){
+                    outputText.value = outputText.value+" "+event.keyCode;
+                }
+            });
+            EventUtils.addHandler(inputText,"keypress",function(event){
+                if(event.charCode){
+                    outputText.value = outputText.value+" "+event.charCode;
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+<!--<div>
+    <input value="addListener测试" type="button"/>
+    <input value="跨浏览器添加删除事件测试" type="button"/>
+    <input value="通过event对象type属性绑定不同事件" type="button"/>
+    <a href="http://www.sina.com.cn">新浪</a>
+</div>
+<div id="mydiv" style="width: 100px;height:100px;background-color: #777777">测试模块</div>
+<div id="mydiv2" style="width: 100px;height:100px;background-color: #777777">测试模块2</div>
+<script>
+    var btn = document.querySelectorAll("input[type='button']")[0];
+    var div = document.getElementsByTagName('div')[0];
+    btn.addEventListener('click',function(){
+        var h =  document.createElement('h4');
+        h.appendChild(document.createTextNode('click1'));
+        div.appendChild(h);
+    },false);
+    btn.addEventListener('click',function(){
+        div.style.backgroundColor="red";
+    },false)
+
+</script>-->
+<div style="height: 2000px">
+    <input type="button" value="测试eventPhase顺序"/>
+    <input type="button" value="测试eventButton"/>
+    <input type="button" value="测试修改键"/>
+    <input type="text" placeholder="测试键盘修改键"/>
+    <div id="dd" style="margin-top: 20px">
+        <label for="inputText">测试键码输入框</label>
+        <input id="inputText" type="text" placeholder="测试键码输入框"/>
+        <label for="outText">测试键码输出框</label>
+        <input id="outText" type="text" placeholder="测试键码输出框"/>
+        <input type="button" value="清空" onclick="document.getElementById('inputText').value=null;document.getElementById('outText').value=null">
+    </div>
+</div>
+
+</body>
+</html>
