@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../js/myUtils.js"></script>
+    <title>测试修改input Value值</title>
+
+</head>
+<body>
+    <form>
+        <input type="text" name="username"  style="ime-mode: disabled;" size="5" maxlength="10" value="nima "/>
+        <textarea name="attach" cols="30" rows="5">我日你妈</textarea>
+        <select name="age">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+        <select name="sexual">
+            <option>male</option>
+            <option>female</option>
+        </select>
+    </form>
+    <script>
+        var elements =document.forms[0].elements;
+        var input = elements['username'];
+        var textarea = elements['attach'];
+        /*点击控件选择内容*/
+        (function(){
+            for(var i = 0;i<elements.length;i++){
+                if(elements[i].type=='text'||elements[i].nodeName=='TEXTAREA'){
+                    EventUtils.addHandler(elements[i],'focus',function(event){
+                       // event = EventUtils.getEvent(event);
+                        this.select();
+                    });
+                }
+            }
+        })();
+
+        /*测试select事件*/
+        /*EventUtils.addHandler(input,'select',function(event){
+            alert(this.value);
+        })*/
+
+        /*只能输入数字*/
+        EventUtils.addHandler(input,'keypress',function(event){
+            event = EventUtils.getEvent(event);
+            var charCode = EventUtils.getCharCode(event);
+            if(!/\d/.test(String.fromCharCode(charCode))&&charCode>9&&!event.ctrlKey){
+                EventUtils.preventDefault(event);
+            }
+        });
+        EventUtils.addHandler(input,'change',function(event){
+            if(!/^[0-9]*$/.test(this.value)){
+                var next = this.nextSibling;
+                var tips = document.createElement('span');
+                tips.style.color='red';
+                tips.style.fontFamily="微软雅黑";
+                tips.style.fontSize="10px";
+                tips.appendChild(document.createTextNode('输入内容不合法'));
+                var p =this.parentNode;
+                next?p.insertBefore(tips,next): p.appendChild(tips);
+            }
+        })
+      /*  /!*禁止粘贴*!/
+        EventUtils.addHandler(input,'paste',function(event){
+            EventUtils.preventDefault(event);
+        });
+        /!*禁止复制*!/
+        EventUtils.addHandler(textarea,'copy',function(event){
+            EventUtils.preventDefault(event);
+        });
+        /!*禁止剪切*!/
+        EventUtils.addHandler(textarea,'cut',function(event){
+            EventUtils.preventDefault(event);
+        });*/
+
+
+        /*在粘贴时，读取粘贴内容，然后确定是否可以粘贴*/
+        EventUtils.addHandler(textarea,'paste',function(event){
+            event =EventUtils.getEvent(event);
+            var text = EventUtils.getClipboardText(event);
+            if(!/^[0-9]*$/.test(text)){
+                EventUtils.preventDefault(event);
+            }
+        });
+
+
+        /*select控件增加自动切换焦点功能*/
+        var select = document.forms[0].elements['age'];
+        EventUtils.addHandler(select,'change',function(event){
+            if(this.value&&this.value!=""){
+                var form =this.form;
+                var target = this;
+                this.a = function(){
+                    for(var i=0;i<form.elements.length;i++){
+                        var thiss =this;
+                        if(form.elements[i]==target){
+                             if(form.elements[i+1]){
+                                 form.elements[i+1].focus();
+                                 return;
+                             }
+                        }
+                    }
+                };
+                this.a();
+            }
+        });
+
+        EventUtils.addHandler(select,'blur',function(event){
+            if(this.value&&this.value!=""){
+                var form =this.form;
+                var target = this;
+                (function(){
+                    for(var i=0;i<form.elements.length;i++){
+                        if(form.elements[i]==target){
+                            if(form.elements[i+1]){
+                                form.elements[i+1].blur();
+                                form.elements[i+1].focus();
+                                return;
+                            }
+                        }
+                    }
+                })();
+            }
+        });
+    </script>
+</body>
+</html>

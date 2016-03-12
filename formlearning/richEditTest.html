@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>富文本编辑</title>
+    <script type="text/javascript" src="../js/myUtils.js"></script>
+    <script>
+        /*将div设置成富文本编辑器*/
+        function openRich(){
+            var div =document.getElementsByTagName('div')[0];
+            div.setAttribute('contenteditable',true);/*这句有效*/
+            div.style.borderColor='green';
+           // div.contenteditable =true;/*这句无效*/
+        }
+
+        function tt(){
+            document.execCommand("fontname",false,'微软雅黑');
+            document.execCommand("forecolor",false,'red');
+            document.execCommand("formatblock",false,'<h1>');
+        }
+    </script>
+</head>
+<body>
+    <div style="width: 400px;height:200px;border:1px double red" >
+
+    </div>
+    <button type="button" onclick="openRich()">打开富文本</button>
+    <button id="title" type="button" onclick="tt()">变成标题</button>
+
+</body>
+</html>

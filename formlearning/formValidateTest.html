@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>html5自带表单验证测试</title>
+    <script type="text/javascript" src="../js/myUtils.js"></script>
+</head>
+<body>
+<form method="post" action="/html5LearningTest.html">
+    <input type="text" name="username" placeholder="username" required="true"/>
+    <input type="email" name="email" placeholder="email" required="true"/>
+    <input type="url" name="url" placeholder="url" required="true"/>
+    <input type="number" name="number" placeholder="number" max="100" min="0" step="5" required="true"/>
+    <select name="age">
+        <option value="">请选择</option>
+        <option value="">19</option>
+        <option value="20" label="11212121212122">21212120</option>
+        <option label="niba" value="21"></option>
+        <option>22</option>
+        <option>23</option>
+        <option>24</option>
+        <option>25</option>
+        <option>26</option>
+        <option>27</option>
+        <option>28</option>
+        <option>29</option>
+        <option>30</option>
+        <option>31</option>
+        <option>32</option>
+        <option>33</option>
+    </select>
+    <select name="age">
+        <option value="">请选择</option>
+        <option value="">19</option>
+        <option value="20" label="11212121212122">21212120</option>
+        <option label="niba" value="21"></option>
+        <option>22</option>
+        <option>23</option>
+        <option>24</option>
+        <option>25</option>
+        <option>26</option>
+        <option>27</option>
+        <option>28</option>
+        <option>29</option>
+        <option>30</option>
+        <option>31</option>
+        <option>32</option>
+        <option>33</option>
+    </select>
+    <textarea name="attach" required="true"></textarea>
+    <input type="checkbox" name="appetite" value="篮球">篮球
+    <input type="checkbox" name="appetite" value="足球">足球
+    <input type="radio" name="sexual" value="male" />男
+    <input type="radio" name="sexual" value="female"/>女
+    <input type="submit" value="nima"/>
+    <input type="button" value="cancel"/>
+    <input type="button" value="序列化"/>
+
+</form>
+<script>
+    /* alert(document.querySelector('input').required);
+     alert(document.querySelector('input').getAttribute('required'));/!*用于ie兼容，通过属性确定是否需要*!/
+     alert("required" in document.createElement('input'));*/
+    var select = document.getElementsByTagName('select')[0];
+    var cancel = document.querySelector('input[type="button"]');
+    cancel.onclick = function () {
+        alert(select.options[select.selectedIndex].value);
+        select.options[select.selectedIndex].selected = false;
+    };
+   /* alert("label:" + select.options[3].label);
+    alert("text:" + select.options[3].text);*/
+    var s = document.getElementsByTagName('select')[1];
+    s.appendChild(select.options[3]);
+
+    var serial = document.querySelectorAll('input[type="button"]')[1];
+    EventUtils.addHandler(serial,'click',function(event){
+        alert(serialize(document.forms[0]));
+
+    });
+
+
+</script>
+</body>
+</html>

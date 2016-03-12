@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>beforeunload</title>
+    <script>
+        window.addEventListener('beforeunload',function(){
+            var message = "wo qu ni ma?";
+            event.returnValue=message;
+            return message;
+        })
+    </script>
+</head>
+<body>
+    <a href="http://www.sina.com.cn">nimei</a>
+</body>
+</html>

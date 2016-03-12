@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟鼠标事件测试</title>
+    <script>
+        /*跨浏览器适用的绑定时间方法*/
+        var EventUtils = {
+            addHandler: function (element, type, handler) {
+                if (element.addEventListener) {
+                    element.addEventListener(type, handler, false);
+                } else if (element.attachEvent) {
+                    element.attachEvent("on" + type, handler);
+                } else {
+                    element["on" + type] = handler;
+                }
+            },
+            removeHander: function (element, type, handler) {
+                if (element.removeEventListener) {
+                    element.removeEventListener(type, handler, false);
+                } else if (element.detachEvent) {
+                    element.detachEvent("on" + type, handler);
+                } else {
+                    element["on" + type] = null;
+                }
+            },
+            getEvent: function (event) {
+                return event ? event : window.event;
+            },
+            getTarget: function (event) {
+                return event.getTarget ? event.getTarget : event.srcElement;
+            },
+            preventDefault:function(event){
+                event.preventDefault?event.preventDefault():event.returnValue=false;
+            },
+            stopPropagation:function(event){
+                event.stopPropagation?event.stopPropagation():event.cancelBubble=true;
+            },
+            getRelatedTarget:function(event){
+                if(event.relatedTarget){
+                    return event.relatedTarget;
+                }else if(event.fromElement){
+                    return event.fromElement;
+                }else if(event.toElement){
+                    return event.toElement;
+                }else{
+                    return null;
+                }
+            },
+            /*当时间为mouseup或者mousedown时，可以通过event.button方法确定鼠标上哪个按键*/
+            getButton:function(event){
+                if(document.implementation.hasFeature('MouseEvents','2.0')){
+                    return event.button;
+                }else{
+                    switch(event.button){
+                        case 1:
+                        case 3:
+                        case 5:
+                        case 7:
+                            return 0;
+                        case 2:
+                        case 6:
+                            return 2;
+                        case 4:
+                            return 1;
+                    }
+                }
+            },
+
+            /*获得鼠标滚轮事件中的滚动值*/
+            getWheelDelta:function(event){
+                if(event.wheelDelta){
+                    return event.wheelDelta;
+                }else{
+                    return -event.detail*40;
+                }
+            },
+            /*获取字符编码值*/
+            getCharCode:function(event){
+                if(typeof event.charCode=='number'){
+                    return event.charCode;
+                }else{
+                    return event.keyCode;
+                }
+            }
+        }
+
+        window.onload= function () {
+            var input = document.getElementsByTagName('input')[0];
+            var event = document.createEvent("MouseEvents");
+            event.initEvent('click',true,true);
+            input.dispatchEvent(event);
+
+            var input2 = document.getElementsByTagName('input')[1];
+            if(document.implementation.hasFeature('KeyboardEvents','3.0')){
+                var event2 = document.createEvent('KeyboardEvent');
+                event2.charCode='a';
+                event2.initEvent('keydown',true,true);
+                input2.dispatchEvent(event2);
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="模拟鼠标点击" onclick="alert('没人点我')"/>
+    <input type="text" placeholder="模拟键盘输入" onkeydown="this.value=event.charCode;"/>
+</body>
+</html>

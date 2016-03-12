@@ -2,9 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>html5 javascript特性</title>
+    <style>
+        .container {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            vertical-align: middle;
+        }
+
+        .scrollDiv {
+            width: 200px;
+            height: 300px;
+            background-color: blueviolet;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 22px;
+            color: white;
+        }
+    </style>
+    <script>
+        /*   window.onload=function(){
+         var foc = document.getElementById('focusButton');
+         foc.focus();
+         alert(document.activeElement===foc);
+         alert(document.hasFocus());
+         //以上两方法都是html5特性
+         }*/
+
+        /*window.onload =function(){
+         alert(document.charset);
+         alert(document.defaultCharset);
+         alert(document.head.nodeName);
+         //html新特定
+         }*/
+
+        /*html5自定义data-*属性获取方法*/
+        function dataTest() {
+            var div = document.querySelector('.container');
+            alert("app:" + div.dataset.app);
+            alert("name:" + div.dataset.name);
+        }
+
+        function createHtml() {
+            var div = document.querySelectorAll('.container')[1];
+            alert(div.innerHTML);
+            div.innerHTML = div.innerHTML + "<p style=\"background-color:red\">加入一段废话</p>";
+            alert(div.innerHTML);
+        }
+
+        function outHtmlTest() {
+            var div = document.querySelectorAll('.container')[2];
+            alert(div.outerHTML);
+            /*使用outerHTML方法替换元素*/
+            // div.outerHTML="<p>kill all div</p>";
+
+            /*传统方式替换元素*/
+            var p = document.createElement("p");
+            p.appendChild(document.createTextNode('kill all div'));
+            div.parentNode.replaceChild(p, div);
+        }
+        var flag = 0
+        function insertHtmlTest() {
+            var div = document.querySelectorAll('.container')[3];
+            var p = div.querySelector('p');
+            switch (flag) {
+                case 0:
+                    p.insertAdjacentHTML('beforebegin', '<h6>beforebegin</h6>');
+                    ++flag;
+                    break;
+                case 1:
+                    p.insertAdjacentHTML('afterbegin', '<h6>afterbegin</h6>');
+                    ++flag;
+                    break;
+                case 2:
+                    p.insertAdjacentHTML('beforeend', '<h6>beforend</h6>');
+                    ++flag;
+                    break;
+                case 3:
+                    p.insertAdjacentHTML('afterend', '<h6>afterend</h6>');
+                    flag = 0;
+                    break;
+            }
+            div.scrollIntoView()
+        }
+        var flag = 0;
+        function scrollTest() {
+            var divs = document.querySelectorAll('.scrollDiv');
+            if (flag == 6) {
+                divs[0].scrollIntoView();
+                flag = 1;
+            } else {
+                var div = divs[flag];
+                div.scrollIntoView();/*该方法chrome支持*/
+                ++flag;
+            }
+        }
+    </script>
 </head>
 <body>
+<div class="container" style="background-color: red" data-name="niba" data-app="test">
+    <input type="button" value="焦点控制" id="focusButton"/>
+    <input type="button" value="data-测试" onclick="dataTest()"/>
+</div>
+<div class="container" style="background-color: yellow">
+    <input type="button" value="inner-html测试" onclick="createHtml()"/>
+</div>
+<div class="container" style="background-color: gold">
+    <input type="button" value="outer-html测试" onclick="outHtmlTest()"/>
+</div>
 
+
+<div class="container" style="background-color: #d9f499">
+    <p>这是各一个p</p>
+    <input type="button" value="insertAdjacentHTML测试" onclick="insertHtmlTest()"/>
+</div>
+<input type="button" value="scroll测试" onclick="scrollTest()" style="position: fixed;z-index: 99"/>
+<div class="scrollDiv">1</div>
+<div class="scrollDiv">2</div>
+<div class="scrollDiv">3</div>
+<div class="scrollDiv">4</div>
+<div class="scrollDiv">5</div>
+<div class="scrollDiv">6</div>
+<div style="height: 1000px;width: 10px"></div>
 </body>
 </html>

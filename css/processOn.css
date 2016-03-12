@@ -1,0 +1,209 @@
+
+body{
+    margin: 0px;
+    overflow-x:hidden;
+    font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif
+}
+.banner{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: bottom center;
+    position: absolute;
+    min-width: 1024px;
+    display: none;
+}
+.active.banner{
+    display: block;
+    animation: opacity 1s;
+    -moz-animation: opacity 1s;	/* Firefox */
+    -webkit-animation: opacity 1s;	/* Safari 和 Chrome */
+    -o-animation: opacity 1s;
+}
+
+.banner-btn.left{
+    width:70px;
+    height: 70px;
+    position: absolute;
+    z-index: 1111;
+    left:30px;
+    top:50%;
+    opacity:0.5
+}
+.banner-btn.right{
+    width:70px;
+    height: 70px;
+    position: absolute;
+    z-index: 1111;
+    right:30px;
+    top:50%;
+    opacity:0.5
+}
+.banner-btn:hover{
+    cursor: pointer;
+    opacity: 1;
+}
+.content{
+    margin:0 auto;
+    width:960px;
+    padding-top:70px;
+    color:white;
+}
+.content .label{
+    font-size: 45px;
+    display: block;
+}
+.content-desc{
+    display: inline-block;
+    vertical-align: top;
+    width:260px;
+}
+.content-desc .description{
+    padding-top: 25px;
+    font-size: 21px;
+}
+a.banner-btn{
+    display: inline-block;
+    width:110px;
+    height:45px;
+    background-color:#29AB59;
+    text-decoration: none;
+    position: relative;
+    top:100px;
+    font-size: 21px;
+    text-align: center;
+    line-height: 45px;
+}
+.content-img{
+    display: inline-block;
+    vertical-align: top;
+    width: 650px;
+    padding:50px 0 0 40px;
+}
+.content-img img{
+    width:580px;
+    height: 350px;
+}
+.content-img2{
+    display: inline-block;
+    position: relative;
+}
+.content-img2 img{
+    width:790px;
+    height: 340px;
+}
+
+div.move{
+    animation: padding 1s;
+    -moz-animation: padding 1s;	/* Firefox */
+    -webkit-animation: padding 1s;	/* Safari 和 Chrome */
+    -o-animation: padding 1s;
+}
+div.move2{
+    position: absolute;
+    animation: left 1s;
+    -moz-animation: left 1s;	/* Firefox */
+    -webkit-animation: left 1s;	/* Safari 和 Chrome */
+    -o-animation: left 1s;
+}
+
+@keyframes padding
+{
+    from {padding-left: 200px;}
+    to {padding-left: 0px;}
+}
+
+@-moz-keyframes padding /* Firefox */
+{
+    from {padding-left: 200px;}
+    to {padding-left: 0px;}
+}
+
+@-webkit-keyframes padding /* Safari 和 Chrome */
+{
+    from {padding-left: 200px;}
+    to {padding-left: 0px;}
+}
+
+@-o-keyframes padding /* Opera */
+{
+    from {padding-left: 200px;}
+    to {padding-left: 0px;}
+}
+@keyframes opacity
+{
+    from {opacity: 0.7;}
+    to {opacity: 1;}
+}
+
+@-moz-keyframes opacity /* Firefox */
+{
+    from {opacity: 0.7;}
+    to {opacity: 1;}
+}
+
+@-webkit-keyframes opacity /* Safari 和 Chrome */
+{
+    from {opacity: 0.7;}
+    to {opacity: 1;}
+}
+
+@-o-keyframes opacity /* Opera */
+{
+    from {opacity: 0.7;}
+    to {opacity: 1;}
+}
+@keyframes left
+{
+    from {left:-200px;}
+    to {left: 0px;}
+}
+
+@-moz-keyframes left /* Firefox */
+{
+    from {left:-200px;}
+    to {left: 0px;}
+}
+
+@-webkit-keyframes left /* Safari 和 Chrome */
+{
+    from {left:-200px;}
+    to {left: 0px;}
+}
+
+@-o-keyframes left /* Opera */
+{
+    from {left:-200px;}
+    to {left: 0px;}
+}
+.foot{
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    bottom: 0;
+    left: 0;
+    z-index: 1111;
+    box-shadow:0px 1px 1px #9edeff inset;
+    padding:10px 0px;
+    opacity: 0.5;
+    border-top:1px solid black;
+}
+
+.foot-fix{
+    color:black;
+    position: fixed;
+    width: 100%;
+    top:0px;
+    left: 0px;
+    height: 40px;
+    z-index: 1111;
+    padding:10px 0px;
+    opacity: 1;
+    background-color: #f2f2f2;
+    border-bottom:1px solid black;
+    box-shadow:0px 3px 3px #E4E4E4;
+}
+
+
+
