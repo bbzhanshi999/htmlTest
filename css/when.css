@@ -1,0 +1,19 @@
+div.a {
+  background-color: red;
+}
+div.b {
+  background-color: yellow;
+}
+/*不用函数*/
+.wide {
+  width: 400px;
+}
+.narrow {
+  width: 1350px;
+}
+.normal {
+  width: 300px;
+}
+.notpixel {
+  width: 888px;
+}

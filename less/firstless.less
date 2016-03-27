@@ -1,0 +1,27 @@
+.border-corners(@radius:5px){
+  border-radius:@radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+.container-color{
+  color:#9edeff;
+}
+
+div.container{
+  .border-corners(10px);
+  .container-color;
+}
+
+a{
+  .border-corners(2px);
+}
+
+#fuck{
+  background:darkred;
+}
+
+.mixin-class{
+  #fuck();
+}
+

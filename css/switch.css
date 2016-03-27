@@ -1,0 +1,17 @@
+.fixed {
+  color: yellow;
+}
+.light {
+  color: #9a9a9a;
+  display: inline-block;
+}
+.dark {
+  color: #004d00;
+  display: inline-block;
+}
+.example1 {
+  color: red;
+}
+.example2 {
+  color: #81707b;
+}

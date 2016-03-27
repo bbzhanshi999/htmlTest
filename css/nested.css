@@ -1,0 +1,33 @@
+.header {
+  font-size: 12px;
+}
+.header p {
+  font-size: 10px;
+}
+.header.float {
+  float: left;
+}
+.header.light {
+  font-weight: lighter;
+}
+.header .top {
+  margin-top: 0px;
+}
+.header h1 {
+  color: black;
+  font-weight: bolder;
+  font-weight: lighter;
+}
+.header a {
+  text-decoration: none;
+}
+.header a:hover {
+  font-style: italic;
+  font-weight: lighter;
+}
+.light {
+  font-weight: lighter;
+}
+.title {
+  font-weight: bolder;
+}

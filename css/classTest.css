@@ -1,0 +1,42 @@
+.borderd {
+  font-weight: bolder;
+  background-image: url("nimei/images/1.png");
+  filter: ms:fuck;
+  margin-top: auto;
+}
+.a {
+  font-weight: bolder;
+  background-image: url("nimei/images/1.png");
+  filter: ms:fuck;
+  margin-top: auto;
+  font-size: larger;
+}
+.b {
+  font-weight: bolder;
+  background-image: url("nimei/images/1.png");
+  filter: ms:fuck;
+  margin-top: auto;
+  font-size: larger;
+  color: #2fb4da;
+}
+.c {
+  background: center;
+}
+.d {
+  background: center;
+  font-weight: bolder;
+  background-image: url("nimei/images/1.png");
+  filter: ms:fuck;
+  margin-top: auto;
+  font-size: larger;
+  color: #2fb4da;
+}
+a:hover {
+  background: center;
+  font-weight: bolder;
+  background-image: url("nimei/images/1.png");
+  filter: ms:fuck;
+  margin-top: auto;
+  font-size: larger;
+  color: #2fb4da;
+}

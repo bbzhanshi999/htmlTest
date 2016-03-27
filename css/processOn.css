@@ -205,5 +205,42 @@ div.move2{
     box-shadow:0px 3px 3px #E4E4E4;
 }
 
+.side {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    right:-270px;
+    background: #9a9292;
+    opacity: 0.5;
+}
 
+.tip {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    width:30px;
+    height: 100%;
+    padding-top: 100%;
+}
+.tip a{
+    border: 1px solid darkgray;
+    font-size: 30px;
+    text-decoration: none;
+    display: block;
+    color:beige;
+}
 
+.side-content {
+    display: inline-block;
+    vertical-align: middle;
+    width: 240px;
+    height: 100%;
+}
+.side:hover{
+    right:0px;
+    -webkit-transition: right 1s;
+    -moz-transition: right 1s;
+    -ms-transition: right 1s;
+    -o-transition: right 1s;
+    transition: right 1s;
+}

@@ -965,4 +965,73 @@ Person.prototype = {
 
 var p = new Person();
 p.sayJob();*/
+
 /****************/
+
+/*Date.prototype.dateFormat=function(){
+    console.log(this.getFullYear()+"-"+(this.getMonth()+1)+"-"+this.getDate());
+}*/
+/*function Date1(){
+    Date.call();
+}
+var proto = Object.create(Date.prototype);
+proto.constructor=Date1;
+Date1.prototype=proto;
+Date1.prototype.dateFormat=function(){
+    console.log(this.getFullYear()+"-"+(this.getMonth()+1)+"-"+this.getDate());
+
+}
+var d =new Date1();
+d.dateFormat();*/
+
+function inheritPrototype(superType,subType){
+
+    var prototype = Object.create(superType.prototype);
+
+    prototype.constructor = subType;
+
+    subType.prototype=prototype;
+
+}
+
+function SuperType(name){
+
+    this.name = name ;
+
+    this.colors=["red","yellow","black"];
+
+}
+
+SuperType.prototype.sayName = function(){
+
+    console.log(this.name);
+
+}
+
+
+function SubType(name,age){
+
+    SuperType.call(this,name);
+
+    this.age =age;
+
+}
+SubType.show = function(){
+  console.log("wo ri ni ma ");
+};
+
+inheritPrototype(SuperType,SubType);
+
+
+SubType.prototype.sayAge =function(){
+
+    console.log(this.age+"   "+this.name);
+
+}
+
+var s = new SubType("nidie","29");
+
+s.show();
+
+
+

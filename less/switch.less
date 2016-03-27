@@ -1,0 +1,44 @@
+.mixin (dark, @color) {
+  color: darken(@color, 10%);
+}
+.mixin (light, @color) {
+  color: lighten(@color, 10%);
+}
+.mixin (fix,@color:yellow){
+  color: @color;
+}
+.mixin (@_, @_) {
+  display: inline-block;
+}
+
+@fix: fix;
+@light: light;
+@dark: dark;
+
+.fixed {
+  .mixin(@fix);
+}
+.light{
+  .mixin(@light,grey);
+}
+.dark{
+  .mixin(@dark,green);
+}
+
+.mixin2(@a,@b){
+  color:mix(@a,@b,70%)
+}
+
+.mixin2(@a){
+  color:@a
+}
+
+.example1{
+  .mixin2(red);
+}
+.example2{
+  .mixin2(#995E91,#4A9A49);
+}
+
+
+

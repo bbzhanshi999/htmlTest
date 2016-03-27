@@ -1,0 +1,43 @@
+.mixin (@a) when (lightness(@a)>50%){
+    background-color: red;
+}
+
+.mixin (@a) when (lightness(@a)=<50%){
+  background-color: yellow;
+}
+
+div.a{
+  .mixin(#aaa);
+}
+
+div.b{
+  .mixin(#555);
+}
+
+
+/*不用函数*/
+.mixin2(@b) when(@b>300px){
+    width:@b*3;
+}
+.mixin2(@b) when(@b<300px){
+    width:@b*2;
+}
+.mixin2(@b) when(@b=300px){
+    width: @b;
+}
+.mixin2(@b) when not (ispixel(@b)){
+    width:888px;
+}
+
+.wide{
+  .mixin2(200px);
+}
+.narrow{
+  .mixin2(450px);
+}
+.normal{
+  .mixin2(300px);
+}
+.notpixel{
+  .mixin2('wocap');
+}

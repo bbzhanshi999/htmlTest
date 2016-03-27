@@ -1,0 +1,30 @@
+@based:"nimei";
+
+.borderd{
+  font-weight: bolder;
+  background-image: url("@{based}/images/1.png");
+  filter: ~"ms:fuck";
+  margin-top: auto;
+}
+
+.a{
+  .borderd;
+  font-size: larger;
+}
+
+.b{
+  .a;
+  color: #2fb4da;
+}
+.c{
+  background: center;
+}
+
+.d{
+  .c;
+  .b;
+}
+
+a:hover{
+  .d();
+}

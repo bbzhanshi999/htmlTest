@@ -1,0 +1,9 @@
+#header {
+  color: #6c94be;
+}
+#foot {
+  color: #5B83AD;
+}
+a:before {
+  content: attr(title) " ";
+}

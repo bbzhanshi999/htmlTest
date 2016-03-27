@@ -1,0 +1,23 @@
+/*variables*/
+.header {
+  font-size: 12px;
+  color: black;
+}
+.header p {
+  font-size: 10px;
+}
+.header p a {
+  cursor: pointer;
+  background: red;
+  color: #29AB59;
+  font-weight: bolder;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+.header h1 {
+  font-size: 30px;
+}
+.bold {
+  font-weight: bolder;
+}
