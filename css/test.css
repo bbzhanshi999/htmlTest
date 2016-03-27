@@ -19,4 +19,5 @@ p a {
 }
 p a:hover {
   font-style: italic;
+  font-family: Aharoni;
 }
