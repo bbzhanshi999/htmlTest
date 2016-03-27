@@ -1,0 +1,22 @@
+p {
+  height: auto;
+}
+p.light {
+  font-family: '微软雅黑 Light';
+  font-size: small;
+  color: red;
+  font-weight: lighter;
+}
+p.bold {
+  font-family: 微软雅黑;
+  font-size: large;
+  color: blue;
+  font-weight: bolder;
+}
+p a {
+  cursor: pointer;
+  text-decoration: none;
+}
+p a:hover {
+  font-style: italic;
+}

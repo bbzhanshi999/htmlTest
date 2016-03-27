@@ -1,0 +1,31 @@
+#global {
+  .light() {
+    font-family: '微软雅黑 Light';
+    font-size: small;
+    color: red;
+    font-weight: lighter;
+  }
+  .bold() {
+    font-family: 微软雅黑;
+    font-size: large;
+    color: blue;
+    font-weight: bolder;
+  }
+}
+
+p {
+  height: auto;
+  &.light {
+    #global> .light();
+  }
+  &.bold {
+    #global> .bold;
+  }
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    &:hover{
+      font-style: italic;
+    }
+  }
+}
